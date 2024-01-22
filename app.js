@@ -5,7 +5,7 @@ let numeroMaximo = 70;
 let listaNumerosSorteados = [];
 let intentos = 0;
 let juego_Numero = 0;
-let juegoMaximo = 5;
+let juegoMaximo = 3;
 
 // Funcion para asignar texto a elementos HTML
 function asignarTextoElemento(elemento, texto) {
