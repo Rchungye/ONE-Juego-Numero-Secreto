@@ -17,16 +17,24 @@ function asignarTextoElemento(elemento, texto) {
 // Funcion verifica intento del usuario
 function verificarIntento() {
     let numeroUsuario = parseInt(document.getElementById('valorUsuario').value);
+    let sonidoBump = document.getElementById('sonidoBump');
+    let sonidoCoin = document.getElementById('sonidoCoin');
     if (numeroUsuario === numeroSecreto) {
         asignarTextoElemento('p', `Acertaste el número en ${intentos} ${(intentos === 1) ? 'vez' : 'veces'}`);
         document.getElementById('reiniciar').removeAttribute('disabled');
+        // Reproduce coin sound
+        sonidoCoin.play();
     }
     // El usuario no acertó.
     if (numeroUsuario > numeroSecreto) {
         asignarTextoElemento('p', `El número secreto es menor`);
+        // Reproduce bump sound
+        sonidoBump.play();
     }
     if (numeroUsuario < numeroSecreto) {
         asignarTextoElemento('p', `El número secreto es mayor`);
+        // Reproduce bump sound
+        sonidoBump.play();
     }
     intentos++;
     limpiarCaja();
@@ -41,12 +49,15 @@ function limpiarCaja() {
 // Funcion genera numero secreto
 function generarNumeroSecreto() {
     let numeroGenerado = Math.floor(Math.random() * (numeroMaximo - numeroMinimo + 1)) + numeroMinimo;
+    let sonidoWorldClear = document.getElementById('sonidoWorldClear');
     console.log('Numero generado es: ' + numeroGenerado);
     console.log('Numeros sorteados: ' + listaNumerosSorteados);
     // Si ya sorteamos todos los números
     if (juego_Numero == juegoMaximo) {
-        asignarTextoElemento('h1', `Oh no reinicia la pagina!`);
-        asignarTextoElemento('p', `Ya jugaste el maximo de ${juegoMaximo} juegos!`);
+        asignarTextoElemento('h1', `GAME OVER`);
+        asignarTextoElemento('p', `Ya jugaste el maximo de ${juegoMaximo} juegos!` + "\nReinicia la pagina!");
+        // Reproduce bump sound
+        sonidoWorldClear.play();
     } else {
         //Si el numero generado está incluido en la lista 
         if (listaNumerosSorteados.includes(numeroGenerado)) {
@@ -72,6 +83,9 @@ function reiniciarJuego() {
     condicionesIniciales();
     // Deshabilitar el botón de nuevo juego
     document.querySelector('#reiniciar').setAttribute('disabled', 'true');
+    // Reproduce pipe sound
+    let sonidoPipe = document.getElementById('sonidoPipe');
+    sonidoPipe.play();
 }
 
 // Llamado para el inicio del juego
