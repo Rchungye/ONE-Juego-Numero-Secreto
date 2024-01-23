@@ -6,6 +6,10 @@ let listaNumerosSorteados = [];
 let intentos = 0;
 let juego_Numero = 0;
 let juegoMaximo = 3;
+let sonidoBump = document.getElementById('sonidoBump');
+let sonidoCoin = document.getElementById('sonidoCoin');
+let sonidoPipe = document.getElementById('sonidoPipe');
+let sonidoWorldClear = document.getElementById('sonidoWorldClear');
 
 // Funcion para asignar texto a elementos HTML
 function asignarTextoElemento(elemento, texto) {
@@ -17,8 +21,6 @@ function asignarTextoElemento(elemento, texto) {
 // Funcion verifica intento del usuario
 function verificarIntento() {
     let numeroUsuario = parseInt(document.getElementById('valorUsuario').value);
-    let sonidoBump = document.getElementById('sonidoBump');
-    let sonidoCoin = document.getElementById('sonidoCoin');
     if (numeroUsuario === numeroSecreto) {
         asignarTextoElemento('p', `Acertaste en ${intentos} ${(intentos === 1) ? 'intento' : 'intentos'}`);
         document.getElementById('reiniciar').removeAttribute('disabled');
@@ -49,7 +51,6 @@ function limpiarCaja() {
 // Funcion genera numero secreto
 function generarNumeroSecreto() {
     let numeroGenerado = Math.floor(Math.random() * (numeroMaximo - numeroMinimo + 1)) + numeroMinimo;
-    let sonidoWorldClear = document.getElementById('sonidoWorldClear');
     console.log('Numero generado es: ' + numeroGenerado);
     console.log('Numeros sorteados: ' + listaNumerosSorteados);
     // Si ya sorteamos todos los números
@@ -84,7 +85,6 @@ function reiniciarJuego() {
     // Deshabilitar el botón de nuevo juego
     document.querySelector('#reiniciar').setAttribute('disabled', 'true');
     // Reproduce pipe sound
-    let sonidoPipe = document.getElementById('sonidoPipe');
     sonidoPipe.play();
 }
 
