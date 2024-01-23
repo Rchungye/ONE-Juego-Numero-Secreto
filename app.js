@@ -29,12 +29,12 @@ function verificarIntento() {
     }
     // El usuario no acertó.
     if (numeroUsuario > numeroSecreto) {
-        asignarTextoElemento('p', `El número es menor a ${numeroUsuario}`);
+        asignarTextoElemento('p', `El número es menor a ${numeroUsuario}\nIndica un número del ${numeroMinimo} al ${numeroMaximo}`);
         // Reproduce bump sound
         sonidoBump.play();
     }
     if (numeroUsuario < numeroSecreto) {
-        asignarTextoElemento('p', `El número es mayor a ${numeroUsuario}`);
+        asignarTextoElemento('p', `El número es mayor a ${numeroUsuario}\nIndica un número del ${numeroMinimo} al ${numeroMaximo}`);
         // Reproduce bump sound
         sonidoBump.play();
     }
@@ -56,7 +56,7 @@ function generarNumeroSecreto() {
     // Si ya sorteamos todos los números
     if (juego_Numero == juegoMaximo) {
         asignarTextoElemento('h1', `GAME OVER`);
-        asignarTextoElemento('p', `Ya jugaste el maximo de ${juegoMaximo} juegos!` + "\nReinicia la pagina!");
+        asignarTextoElemento('p', `Ya jugaste el maximo de ${juegoMaximo} juegos!\nReinicia la pagina!`);
         // Reproduce bump sound
         sonidoWorldClear.play();
     } else {
