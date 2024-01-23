@@ -57,6 +57,7 @@ function generarNumeroSecreto() {
     if (juego_Numero == juegoMaximo) {
         asignarTextoElemento('h1', `GAME OVER\nYOU WIN!!!`);
         asignarTextoElemento('p', `Ya jugaste el maximo de ${juegoMaximo} juegos!\nReinicia la pagina!`);
+        document.getElementById('Intentar').setAttribute('disabled', 'true');
         // Reproduce bump sound
         sonidoWorldClear.play();
     } else {
