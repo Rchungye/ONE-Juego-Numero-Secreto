@@ -55,7 +55,7 @@ function generarNumeroSecreto() {
     console.log('Numeros sorteados: ' + listaNumerosSorteados);
     // Si ya sorteamos todos los números
     if (juego_Numero == juegoMaximo) {
-        asignarTextoElemento('h1', `GAME OVER`);
+        asignarTextoElemento('h1', `GAME OVER\nYOU WIN!!!`);
         asignarTextoElemento('p', `Ya jugaste el maximo de ${juegoMaximo} juegos!\nReinicia la pagina!`);
         // Reproduce bump sound
         sonidoWorldClear.play();
