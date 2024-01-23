@@ -27,12 +27,12 @@ function verificarIntento() {
     }
     // El usuario no acertó.
     if (numeroUsuario > numeroSecreto) {
-        asignarTextoElemento('p', `El número secreto es menor`);
+        asignarTextoElemento('p', `El número es menor a ${numeroUsuario}`);
         // Reproduce bump sound
         sonidoBump.play();
     }
     if (numeroUsuario < numeroSecreto) {
-        asignarTextoElemento('p', `El número secreto es mayor`);
+        asignarTextoElemento('p', `El número es mayor a ${numeroUsuario}`);
         // Reproduce bump sound
         sonidoBump.play();
     }
