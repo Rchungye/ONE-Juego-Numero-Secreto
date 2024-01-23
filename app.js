@@ -20,7 +20,7 @@ function verificarIntento() {
     let sonidoBump = document.getElementById('sonidoBump');
     let sonidoCoin = document.getElementById('sonidoCoin');
     if (numeroUsuario === numeroSecreto) {
-        asignarTextoElemento('p', `Acertaste el número en ${intentos} ${(intentos === 1) ? 'vez' : 'veces'}`);
+        asignarTextoElemento('p', `Acertaste en ${intentos} ${(intentos === 1) ? 'intento' : 'intentos'}`);
         document.getElementById('reiniciar').removeAttribute('disabled');
         // Reproduce coin sound
         sonidoCoin.play();
