@@ -11,6 +11,9 @@ let sonidoCoin = document.getElementById('sonidoCoin');
 let sonidoPipe = document.getElementById('sonidoPipe');
 let sonidoWorldClear = document.getElementById('sonidoWorldClear');
 
+// Llamado para el inicio del juego
+condicionesIniciales();
+
 // Funcion para asignar texto a elementos HTML
 function asignarTextoElemento(elemento, texto) {
     let elementoHTML = document.querySelector(elemento);
@@ -24,18 +27,15 @@ function verificarIntento() {
     if (numeroUsuario === numeroSecreto) {
         asignarTextoElemento('p', `Acertaste en ${intentos} ${(intentos === 1) ? 'intento' : 'intentos'}`);
         document.getElementById('reiniciar').removeAttribute('disabled');
-        // Reproduce coin sound
         sonidoCoin.play();
     }
     // El usuario no acertó.
     if (numeroUsuario > numeroSecreto) {
         asignarTextoElemento('p', `El número es menor a ${numeroUsuario}\nIndica un número del ${numeroMinimo} al ${numeroMaximo}`);
-        // Reproduce bump sound
         sonidoBump.play();
     }
     if (numeroUsuario < numeroSecreto) {
         asignarTextoElemento('p', `El número es mayor a ${numeroUsuario}\nIndica un número del ${numeroMinimo} al ${numeroMaximo}`);
-        // Reproduce bump sound
         sonidoBump.play();
     }
     intentos++;
@@ -58,7 +58,6 @@ function generarNumeroSecreto() {
         asignarTextoElemento('h1', `GAME OVER\nYOU WIN!!!`);
         asignarTextoElemento('p', `Ya jugaste el maximo de ${juegoMaximo} juegos!\nReinicia la pagina!`);
         document.getElementById('Intentar').setAttribute('disabled', 'true');
-        // Reproduce bump sound
         sonidoWorldClear.play();
     } else {
         //Si el numero generado está incluido en la lista 
@@ -83,11 +82,6 @@ function condicionesIniciales() {
 function reiniciarJuego() {
     limpiarCaja();
     condicionesIniciales();
-    // Deshabilitar el botón de nuevo juego
     document.querySelector('#reiniciar').setAttribute('disabled', 'true');
-    // Reproduce pipe sound
     sonidoPipe.play();
 }
-
-// Llamado para el inicio del juego
-condicionesIniciales();
