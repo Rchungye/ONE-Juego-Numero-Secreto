@@ -80,7 +80,7 @@ function limpiarCaja() {
 
 // Funcion de condiciones iniciales del juego
 function condicionesIniciales() {
-    asignarTextoElemento('h1', `Juego ${juego_Numero + 1} del número secreto!`);
+    asignarTextoElemento('h1', `Nivel ${juego_Numero + 1} del número secreto!`);
     asignarTextoElemento('p', `Adivina el número secreto!!!`);
     asignarPlaceholderInputs('valorUsuario', `Indica un número del ${numeroMinimo} al ${numeroMaximo}`);
     document.getElementById('Intentar').removeAttribute('disabled');
@@ -100,9 +100,9 @@ function reiniciarJuego() {
 // Funcion para mostar el final del juego
 function finalJuego() {
     asignarTextoElemento('h1', `GAME OVER\nYOU WIN!!!`);
-    asignarTextoElemento('p', `Ya jugaste el maximo de ${juegoMaximo} juegos!`);
+    asignarTextoElemento('p', `Ganaste todos los ${juegoMaximo} niveles!!!`);
     document.getElementById('Intentar').setAttribute('disabled', 'true');
-    asignarPlaceholderInputs('valorUsuario', `Reinicia la pagina!`);
+    asignarPlaceholderInputs('valorUsuario', `Reinicia la pagina!!!`);
     document.getElementById('valorUsuario').setAttribute('disabled', 'true');
     sonidoWorldClear.play();
 }
