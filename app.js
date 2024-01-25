@@ -4,8 +4,8 @@ let numeroMinimo = 60;
 let numeroMaximo = 70;
 let listaNumerosSorteados = [];
 let intentos = 0;
-let juego_Numero = 0;
-let juegoMaximo = 3;
+let nivel_Numero = 0;
+let nivelMaximo = 3;
 let sonidoBump = document.getElementById('sonidoBump');
 let sonidoCoin = document.getElementById('sonidoCoin');
 let sonidoPipe = document.getElementById('sonidoPipe');
@@ -32,7 +32,7 @@ function generarNumeroSecreto() {
     let numeroGenerado = Math.floor(Math.random() * (numeroMaximo - numeroMinimo + 1)) + numeroMinimo;
     console.log('Numero generado es: ' + numeroGenerado);
     console.log('Numeros sorteados: ' + listaNumerosSorteados);
-    if (juego_Numero == juegoMaximo) {
+    if (nivel_Numero == nivelMaximo) {
         finalJuego();
     } else {
         //Si el numero generado está incluido en la lista 
@@ -40,7 +40,7 @@ function generarNumeroSecreto() {
             return generarNumeroSecreto();
         }
         listaNumerosSorteados.push(numeroGenerado);
-        juego_Numero++;
+        nivel_Numero++;
         return numeroGenerado;
     }
 }
@@ -73,7 +73,7 @@ function limpiarCaja() {
 
 // Funcion de condiciones iniciales del juego
 function condicionesIniciales() {
-    asignarTextoElemento('h1', `Nivel ${juego_Numero + 1} del número secreto!`);
+    asignarTextoElemento('h1', `Nivel ${nivel_Numero + 1} del número secreto!`);
     asignarTextoElemento('p', `Adivina el número secreto!!!`);
     asignarPlaceholderInputs('valorUsuario', `Indica un número del ${numeroMinimo} al ${numeroMaximo}`);
     document.getElementById('Intentar').removeAttribute('disabled');
@@ -103,7 +103,7 @@ function siguienteNivel() {
 // Funcion para mostar el final del juego
 function finalJuego() {
     asignarTextoElemento('h1', `GAME OVER\nYOU WIN!!!`);
-    asignarTextoElemento('p', `Ganaste todos los ${juegoMaximo} niveles!!!`);
+    asignarTextoElemento('p', `Ganaste todos los ${nivelMaximo} niveles!!!`);
     document.getElementById('Intentar').setAttribute('disabled', 'true');
     asignarPlaceholderInputs('valorUsuario', `Reinicia la pagina!!!`);
     document.getElementById('valorUsuario').setAttribute('disabled', 'true');
