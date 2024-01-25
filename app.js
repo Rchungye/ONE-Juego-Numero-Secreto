@@ -21,6 +21,12 @@ function asignarTextoElemento(elemento, texto) {
     return;
 }
 
+// Funcion para asignar Placeholder a Inputs HTML
+function asignarPlaceholderInputs(inputs, texto) {
+    let inputUsuario = document.getElementById(inputs);
+    inputUsuario.placeholder = texto;
+}
+
 // Funcion verifica intento del usuario
 function verificarIntento() {
     let numeroUsuario = parseInt(document.getElementById('valorUsuario').value);
@@ -31,11 +37,11 @@ function verificarIntento() {
     }
     // El usuario no acertó.
     if (numeroUsuario > numeroSecreto) {
-        asignarTextoElemento('p', `El número es menor a ${numeroUsuario}\nIndica un número del ${numeroMinimo} al ${numeroMaximo}`);
+        asignarTextoElemento('p', `El número es menor a ${numeroUsuario}`);
         sonidoBump.play();
     }
     if (numeroUsuario < numeroSecreto) {
-        asignarTextoElemento('p', `El número es mayor a ${numeroUsuario}\nIndica un número del ${numeroMinimo} al ${numeroMaximo}`);
+        asignarTextoElemento('p', `El número es mayor a ${numeroUsuario}`);
         sonidoBump.play();
     }
     intentos++;
@@ -56,8 +62,10 @@ function generarNumeroSecreto() {
     // Si ya sorteamos todos los números
     if (juego_Numero == juegoMaximo) {
         asignarTextoElemento('h1', `GAME OVER\nYOU WIN!!!`);
-        asignarTextoElemento('p', `Ya jugaste el maximo de ${juegoMaximo} juegos!\nReinicia la pagina!`);
+        asignarTextoElemento('p', `Ya jugaste el maximo de ${juegoMaximo} juegos!`);
         document.getElementById('Intentar').setAttribute('disabled', 'true');
+        asignarPlaceholderInputs('valorUsuario', `Reinicia la pagina!`);
+        document.getElementById('valorUsuario').setAttribute('disabled', 'true');
         sonidoWorldClear.play();
     } else {
         //Si el numero generado está incluido en la lista 
@@ -73,7 +81,8 @@ function generarNumeroSecreto() {
 // Funcion de condiciones iniciales del juego
 function condicionesIniciales() {
     asignarTextoElemento('h1', `Juego ${juego_Numero + 1} del número secreto!`);
-    asignarTextoElemento('p', `Indica un número del ${numeroMinimo} al ${numeroMaximo}`);
+    asignarTextoElemento('p', `Adivina el número secreto!!!`);
+    asignarPlaceholderInputs('valorUsuario', `Indica un número del ${numeroMinimo} al ${numeroMaximo}`);
     numeroSecreto = generarNumeroSecreto();
     intentos = 1;
 }
