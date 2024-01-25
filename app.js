@@ -32,7 +32,6 @@ function generarNumeroSecreto() {
     let numeroGenerado = Math.floor(Math.random() * (numeroMaximo - numeroMinimo + 1)) + numeroMinimo;
     console.log('Numero generado es: ' + numeroGenerado);
     console.log('Numeros sorteados: ' + listaNumerosSorteados);
-    // Si ya sorteamos todos los números
     if (juego_Numero == juegoMaximo) {
         finalJuego();
     } else {
@@ -50,14 +49,8 @@ function generarNumeroSecreto() {
 function verificarIntento() {
     let numeroUsuario = parseInt(document.getElementById('valorUsuario').value);
     if (numeroUsuario === numeroSecreto) {
-        asignarTextoElemento('p', `Acertaste en ${intentos} ${(intentos === 1) ? 'intento' : 'intentos'}`);
-        asignarPlaceholderInputs('valorUsuario', `Pasa al siguiente nivel!!!`);
-        document.getElementById('reiniciar').removeAttribute('disabled');
-        document.getElementById('Intentar').setAttribute('disabled', 'true');
-        document.getElementById('valorUsuario').setAttribute('disabled', 'true');
-        sonidoCoin.play();
+        finalNivel();
     }
-    // El usuario no acertó.
     if (numeroUsuario > numeroSecreto) {
         asignarTextoElemento('p', `El número es menor a ${numeroUsuario}`);
         asignarPlaceholderInputs('valorUsuario', `Indica otro número del ${numeroMinimo} al ${numeroMaximo}`);
@@ -89,8 +82,18 @@ function condicionesIniciales() {
     intentos = 1;
 }
 
+// Funcion para mostrar al final del nivel
+function finalNivel() {
+    asignarTextoElemento('p', `Acertaste en ${intentos} ${(intentos === 1) ? 'intento' : 'intentos'}`);
+    asignarPlaceholderInputs('valorUsuario', `Pasa al siguiente nivel!!!`);
+    document.getElementById('reiniciar').removeAttribute('disabled');
+    document.getElementById('Intentar').setAttribute('disabled', 'true');
+    document.getElementById('valorUsuario').setAttribute('disabled', 'true');
+    sonidoCoin.play();
+}
+
 // Funcion reinicia juego
-function reiniciarJuego() {
+function siguienteNivel() {
     limpiarCaja();
     condicionesIniciales();
     document.querySelector('#reiniciar').setAttribute('disabled', 'true');
