@@ -27,21 +27,45 @@ function asignarPlaceholderInputs(inputs, texto) {
     inputUsuario.placeholder = texto;
 }
 
+// Funcion genera numero secreto
+function generarNumeroSecreto() {
+    let numeroGenerado = Math.floor(Math.random() * (numeroMaximo - numeroMinimo + 1)) + numeroMinimo;
+    console.log('Numero generado es: ' + numeroGenerado);
+    console.log('Numeros sorteados: ' + listaNumerosSorteados);
+    // Si ya sorteamos todos los números
+    if (juego_Numero == juegoMaximo) {
+        finalJuego();
+    } else {
+        //Si el numero generado está incluido en la lista 
+        if (listaNumerosSorteados.includes(numeroGenerado)) {
+            return generarNumeroSecreto();
+        }
+        listaNumerosSorteados.push(numeroGenerado);
+        juego_Numero++;
+        return numeroGenerado;
+    }
+}
+
 // Funcion verifica intento del usuario
 function verificarIntento() {
     let numeroUsuario = parseInt(document.getElementById('valorUsuario').value);
     if (numeroUsuario === numeroSecreto) {
         asignarTextoElemento('p', `Acertaste en ${intentos} ${(intentos === 1) ? 'intento' : 'intentos'}`);
+        asignarPlaceholderInputs('valorUsuario', `Pasa al siguiente nivel!!!`);
         document.getElementById('reiniciar').removeAttribute('disabled');
+        document.getElementById('Intentar').setAttribute('disabled', 'true');
+        document.getElementById('valorUsuario').setAttribute('disabled', 'true');
         sonidoCoin.play();
     }
     // El usuario no acertó.
     if (numeroUsuario > numeroSecreto) {
         asignarTextoElemento('p', `El número es menor a ${numeroUsuario}`);
+        asignarPlaceholderInputs('valorUsuario', `Indica otro número del ${numeroMinimo} al ${numeroMaximo}`);
         sonidoBump.play();
     }
     if (numeroUsuario < numeroSecreto) {
         asignarTextoElemento('p', `El número es mayor a ${numeroUsuario}`);
+        asignarPlaceholderInputs('valorUsuario', `Indica otro número del ${numeroMinimo} al ${numeroMaximo}`);
         sonidoBump.play();
     }
     intentos++;
@@ -54,35 +78,13 @@ function limpiarCaja() {
     document.querySelector('#valorUsuario').value = '';
 }
 
-// Funcion genera numero secreto
-function generarNumeroSecreto() {
-    let numeroGenerado = Math.floor(Math.random() * (numeroMaximo - numeroMinimo + 1)) + numeroMinimo;
-    console.log('Numero generado es: ' + numeroGenerado);
-    console.log('Numeros sorteados: ' + listaNumerosSorteados);
-    // Si ya sorteamos todos los números
-    if (juego_Numero == juegoMaximo) {
-        asignarTextoElemento('h1', `GAME OVER\nYOU WIN!!!`);
-        asignarTextoElemento('p', `Ya jugaste el maximo de ${juegoMaximo} juegos!`);
-        document.getElementById('Intentar').setAttribute('disabled', 'true');
-        asignarPlaceholderInputs('valorUsuario', `Reinicia la pagina!`);
-        document.getElementById('valorUsuario').setAttribute('disabled', 'true');
-        sonidoWorldClear.play();
-    } else {
-        //Si el numero generado está incluido en la lista 
-        if (listaNumerosSorteados.includes(numeroGenerado)) {
-            return generarNumeroSecreto();
-        }
-        listaNumerosSorteados.push(numeroGenerado);
-        juego_Numero++;
-        return numeroGenerado;
-    }
-}
-
 // Funcion de condiciones iniciales del juego
 function condicionesIniciales() {
     asignarTextoElemento('h1', `Juego ${juego_Numero + 1} del número secreto!`);
     asignarTextoElemento('p', `Adivina el número secreto!!!`);
     asignarPlaceholderInputs('valorUsuario', `Indica un número del ${numeroMinimo} al ${numeroMaximo}`);
+    document.getElementById('Intentar').removeAttribute('disabled');
+    document.getElementById('valorUsuario').removeAttribute('disabled');
     numeroSecreto = generarNumeroSecreto();
     intentos = 1;
 }
@@ -93,4 +95,14 @@ function reiniciarJuego() {
     condicionesIniciales();
     document.querySelector('#reiniciar').setAttribute('disabled', 'true');
     sonidoPipe.play();
+}
+
+// Funcion para mostar el final del juego
+function finalJuego() {
+    asignarTextoElemento('h1', `GAME OVER\nYOU WIN!!!`);
+    asignarTextoElemento('p', `Ya jugaste el maximo de ${juegoMaximo} juegos!`);
+    document.getElementById('Intentar').setAttribute('disabled', 'true');
+    asignarPlaceholderInputs('valorUsuario', `Reinicia la pagina!`);
+    document.getElementById('valorUsuario').setAttribute('disabled', 'true');
+    sonidoWorldClear.play();
 }
