@@ -92,7 +92,7 @@ function finalNivel() {
     sonidoCoin.play();
 }
 
-// Funcion reinicia juego
+// Funcion pasa al siguiente nivel
 function siguienteNivel() {
     limpiarCaja();
     condicionesIniciales();
