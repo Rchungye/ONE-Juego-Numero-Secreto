@@ -86,7 +86,7 @@ function condicionesIniciales() {
 function finalNivel() {
     asignarTextoElemento('p', `Acertaste en ${intentos} ${(intentos === 1) ? 'intento' : 'intentos'}`);
     asignarPlaceholderInputs('valorUsuario', `Pasa al siguiente nivel!!!`);
-    document.getElementById('reiniciar').removeAttribute('disabled');
+    document.getElementById('siguienteNivel').removeAttribute('disabled');
     document.getElementById('Intentar').setAttribute('disabled', 'true');
     document.getElementById('valorUsuario').setAttribute('disabled', 'true');
     sonidoCoin.play();
@@ -96,7 +96,7 @@ function finalNivel() {
 function siguienteNivel() {
     limpiarCaja();
     condicionesIniciales();
-    document.querySelector('#reiniciar').setAttribute('disabled', 'true');
+    document.querySelector('#siguienteNivel').setAttribute('disabled', 'true');
     sonidoPipe.play();
 }
 
